@@ -1,1 +1,17 @@
-{"nbformat":4,"nbformat_minor":0,"metadata":{"colab":{"provenance":[],"authorship_tag":"ABX9TyPRS1t+Vh6o9KqzZdPDj4Qz"},"kernelspec":{"name":"python3","display_name":"Python 3"},"language_info":{"name":"python"}},"cells":[{"cell_type":"code","execution_count":null,"metadata":{"id":"QaERVllM2Rx2"},"outputs":[],"source":["import streamlit as st\n","from joblib import load\n","import numpy as np\n","\n","# Load the model\n","model = load('linear_regression_model.joblib')\n","\n","# Create a simple user input\n","user_input = st.number_input('Enter house size:', min_value=100, max_value=10000, step=50)\n","\n","# Reshape the input for the model\n","input_array = np.array([user_input]).reshape(-1, 1)\n","\n","# Predict the house price\n","if st.button('Predict Price'):\n","    predicted_price = model.predict(input_array)\n","    st.write(f\"The predicted house price is: ${predicted_price[0]:.2f}\")"]}]}
+import streamlit as st
+from joblib import load
+import numpy as np
+
+# Load the model
+model = load('linear_regression_model.joblib')
+
+# Create a simple user input
+user_input = st.number_input('Enter house size:', min_value=100, max_value=10000, step=50)
+
+# Reshape the input for the model
+input_array = np.array([user_input]).reshape(-1, 1)
+
+# Predict the house price
+if st.button('Predict Price'):
+    predicted_price = model.predict(input_array)
+    st.write(f"The predicted house price is: ${predicted_price[0]:.2f}")
